@@ -1,4 +1,29 @@
 <app-encabezado titulo="Viaje Conductor"></app-encabezado>
 
 <ion-content class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-label position="floating">Destino</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Lugar de Comienzo</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Número de Pasajeros</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label position="floating">Valor por Pasajeros</ion-label>
+      <ion-input type="number"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="onClick('conductortrackeo')">Establecer Ruta</ion-button>
+
 </ion-content>

@@ -74,6 +74,10 @@ const routes: Routes = [
     path: 'viajeconductor',
     loadChildren: () => import('./viajeconductor/viajeconductor.module').then( m => m.ViajeconductorPageModule)
   },
+  {
+    path: 'conductortrackeo',
+    loadChildren: () => import('./conductortrackeo/conductortrackeo.module').then( m => m.ConductortrackeoPageModule)
+  },
   // Agrega aquí las rutas para las páginas de sidemenu si las tienes
 ];
 
