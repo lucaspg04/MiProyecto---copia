@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-avatar slot="end">
+    <img src="../../assets/img/te_llevo.png" />
+    </ion-avatar>
+    <ion-title> Te llevo App </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+<h3>Iniciar Sesión</h3>
+<form  [formGroup]="loginForm"  >
+  <ion-item>
+    <ion-input  formControlName="user" labelPlacement="floating" label="User"  type="user" aria-label="Email" ></ion-input>
+    <ion-icon name="person-outline" slot="end"></ion-icon>
+  </ion-item>
+  <br>
+  <ion-item >
+  <ion-input  formControlName="password" labelPlacement="floating" label="Password"  type="password" aria-label="password"></ion-input>
+  <ion-icon name="lock-closed-outline"></ion-icon>
+  </ion-item>
+  <br>
+  <ion-button  (click)="onsubmit()" expand="full" color="primary" type="submit" class="ion-padding" [disabled]="loginForm.invalid" >
+    Entrar
+  </ion-button>
+</form>
+<p style="text-align: center;">
+  ¿No tienes una cuenta? <a (click)="navegarARegistro()">Registrarse</a>
+</p>
+<p style="text-align: center;">
+  ¿Olvidaste tu contraseña? <a (click)="navegarARecuperar()">Recuperar</a>
+</p>
+</ion-content>

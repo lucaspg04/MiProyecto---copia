@@ -3,19 +3,36 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-avatar slot="end">
+      <img src="../../assets/img/te_llevo.png" />
+    </ion-avatar>
+    <ion-title> Te llevo </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="updateSuggestions()" Placeholder="Donde Te Llevo?"></ion-searchbar>
+
+  <ion-list *ngIf="showSuggestions">
+    <ion-item *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion)">
+      {{ suggestion }}
+    </ion-item>
+    <ion-item *ngIf="showNoResults">No hay resultados</ion-item>
+  </ion-list>
+
+  <div id="page-background" class="ion-align-items-center">
+    <ion-grid class="page-image">
+      <ion-row>
+        <ion-col size="12">
+          <img src="../../../assets/img/google_maps.jpg" alt="te_llevo_logo" class="page-image">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="ion-padding">
+    <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
+      Solicitar
+    </ion-button>
+  </div>
   </div>
 </ion-content>
