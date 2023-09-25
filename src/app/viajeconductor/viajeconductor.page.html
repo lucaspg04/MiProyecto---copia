@@ -1,4 +1,14 @@
-<app-encabezado titulo="Viaje Conductor"></app-encabezado>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-avatar slot="end">
+    <img src="../../assets/img/te_llevo.png" />
+    </ion-avatar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/folder/inbox"></ion-back-button>
+    </ion-buttons>
+    <ion-title> Viaje Conductor </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content class="ion-padding">
   <ion-list>
@@ -23,6 +33,7 @@
       <ion-input type="number"></ion-input>
     </ion-item>
   </ion-list>
+  <br>
 
   <ion-button expand="full" (click)="onClick('conductortrackeo')">Establecer Ruta</ion-button>
 

@@ -17,8 +17,8 @@ export class ConductortrackeoPage implements OnInit {
   async onClick(ruta: string) {
     // Crea una alerta
     const alert = await this.alertController.create({
-      header: 'Pago Recibido',
-      message: 'El pago se ha recibido exitosamente.',
+      header: 'Viaje Finalizado',
+      message: 'El viaje se ha finalizado exitosamente.',
       buttons: [
         {
           text: 'Aceptar',

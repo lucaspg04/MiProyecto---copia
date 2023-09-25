@@ -1,0 +1,20 @@
+#page-background {
+    background-color: #f8fafc; /* Reemplaza esto con el color que desees */
+    display: flex; /* Utiliza un contenedor flexible para centrar la imagen */
+    justify-content: center; /* Centra horizontalmente la imagen */
+    align-items: center; /* Centra verticalmente la imagen */
+    height: 100vh; /* Establece la altura de la página al 100% del viewport */
+}
+
+.fade-in {
+    animation: fadeInAnimation 2s ease-in-out;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+    opacity: 0;
+    }
+    100% {
+    opacity: 1;
+    }
+}

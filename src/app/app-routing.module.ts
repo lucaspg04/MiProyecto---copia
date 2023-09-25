@@ -30,13 +30,17 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'inicio-sesion', // Establece el path para la página de inicio de sesión
-    loadChildren: () => import('./inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
+    path: 'portada',
+    loadChildren: () => import('./portada/portada.module').then( m => m.PortadaPageModule)
   },
   {
     path: '',
-    redirectTo: 'inicio-sesion', // Redirige la ruta raíz a la página de inicio de sesión
+    redirectTo: 'portada', // Redirige la ruta raíz a la página de portada
     pathMatch: 'full'
+  },
+  {
+    path: 'inicio-sesion', // Establece el path para la página de inicio de sesión
+    loadChildren: () => import('./inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
   },
   {
     path: 'folder/:id',
@@ -78,6 +82,7 @@ const routes: Routes = [
     path: 'conductortrackeo',
     loadChildren: () => import('./conductortrackeo/conductortrackeo.module').then( m => m.ConductortrackeoPageModule)
   },
+
   // Agrega aquí las rutas para las páginas de sidemenu si las tienes
 ];
 
