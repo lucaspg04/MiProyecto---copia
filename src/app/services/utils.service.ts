@@ -1,5 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { LoadingController, ToastController,  } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -7,12 +8,32 @@ import { LoadingController, ToastController,  } from '@ionic/angular';
 export class UtilsService {
 
   loadingCtrl = inject(LoadingController);
-  toastCtrl = inject(ToastController);
+  router = inject(Router)
 
 
   //======loading=========
-  loading(){
-    return this.loadingCtrl.create({spinner:'crescent'})
+  loading() {
+    return this.loadingCtrl.create({ spinner: 'crescent' })
 
   }
+
+
+  //======en ruta=========
+  //routerlink(url: string) {
+    //return this.router.navigateByUrl(url);
+
+  //}
+
+  //======guarda en localStorage=========
+  saveInLocalStorage(key: string, value: any) {
+    return localStorage.setItem(key, JSON.stringify(value));
+
+  }
+
+  //======obtiene un elemento desde localStorage=========
+  getFromLocalStorage(key: string) {
+    return JSON.parse(localStorage.getItem(key));
+
+  }
+
 }

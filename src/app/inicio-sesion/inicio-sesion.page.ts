@@ -55,6 +55,7 @@ export class InicioSesionPage implements OnInit {
         console.log(res);
       }).catch(error =>{
         console.log(error);
+
       }).finally(()=>{
         loading.dismiss();
       }
