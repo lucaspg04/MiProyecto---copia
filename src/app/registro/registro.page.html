@@ -7,16 +7,27 @@
       <ion-input  formControlName="user" labelPlacement="floating" label="User"  type="user" aria-label="Nombre de Usuario" ></ion-input>
       <ion-icon name="person-outline" slot="end"></ion-icon>
     </ion-item>
+    <div class="validators" *ngIf="loginForm && loginForm.get('user')?.errors && loginForm.get('user')?.touched">
+      <div *ngIf="loginForm.get('user')?.hasError('required')">El nombre de usuario es obligatorio</div>
+    </div>
     <br>
     <ion-item>
-      <ion-input  formControlName="email" labelPlacement="floating" label="Correo"  type="Email" aria-label="Email" ></ion-input>
+      <ion-input  formControlName="email" labelPlacement="floating" label="email"  type="email" aria-label="email" ></ion-input>
       <ion-icon name="mail-outline"></ion-icon>
     </ion-item>
+    <div class="validators" *ngIf="loginForm && loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+      <div *ngIf="loginForm.get('email')?.hasError('required')">El email es obligatoria</div>
+      <div *ngIf="loginForm.get('email')?.hasError('email')">El email es inválido</div>
+    </div>
     <br>
     <ion-item>
       <ion-input formControlName="password" labelPlacement="floating" label="Password"  type="password" aria-label="password"></ion-input>
       <ion-icon name="lock-closed-outline"></ion-icon>
     </ion-item>
+    <div class="validators" *ngIf="loginForm && loginForm.get('password')?.errors && loginForm.get('password')?.touched">
+      <div *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</div>
+      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 4 caracteres</div>
+    </div>
     <ion-button  (click)="onsubmit();" expand="full" color="primary" type="submit" class="ion-padding" [disabled]="loginForm.invalid" >
       Registrarse
     </ion-button>

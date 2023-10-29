@@ -10,13 +10,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class InicioSesionPage implements OnInit {
   loginForm: FormGroup;
+  showPassword: boolean = false; // Variable para controlar la visibilidad de la contraseña
 
 
     constructor(
     private formBuilder: FormBuilder,private router: Router) {
       this.loginForm = this.formBuilder.group({
-        user: ['', Validators.required],
-        password: ['', Validators.required],
+        user:['', Validators.required],
+        password: ['', [Validators.required, Validators.minLength(4)]], 
       }); 
     }
 
@@ -24,9 +25,13 @@ export class InicioSesionPage implements OnInit {
     
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
 
   navegarARegistro() {
-    this.router.navigate(['/registro']); // Reemplaza 'registro' con la ruta real de tu página de registro
+    this.router.navigate(['/registro']); 
   }
 
   navegarARecuperar() {

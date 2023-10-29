@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 
 
@@ -14,8 +14,8 @@ export class RegistroPage implements OnInit {
   constructor(private formBuilder: FormBuilder,private router: Router) { 
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]], 
     }); 
   }
 

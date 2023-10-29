@@ -9,19 +9,35 @@ import { Router} from '@angular/router';
 })
 export class RecuperarContraseniaPage {
   loginForm: FormGroup; 
+  
 
 
   constructor(private formBuilder: FormBuilder,private router: Router) { 
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password2: ['', Validators.required],
-    }); 
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      password2: ['', [Validators.required, Validators.minLength(4)]],
+    }, {
+      validators: this.passwordsMatchValidator // Agregar la validación personalizada
+    });
   }
 
   ngOnInit() {
   }
+
+  passwordsMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const password2 = formGroup.get('password2')?.value;
+
+    if (password === password2) {
+      formGroup.get('password2')?.setErrors(null); 
+    } else {
+      formGroup.get('password2')?.setErrors({ passwordMismatch: true }); // Contraseñas no coinciden
+    }
+  }
+
+  
 
   onsubmit() {
     if (this.loginForm.valid) {
