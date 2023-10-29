@@ -4,11 +4,12 @@
   <h3>Registro de Usuario</h3>
   <form [formGroup]="loginForm"  >
     <ion-item>
-      <ion-input  formControlName="user" labelPlacement="floating" label="User"  type="user" aria-label="Nombre de Usuario" ></ion-input>
+      <ion-input  formControlName="name" labelPlacement="floating" label="Nombre de Usuario"  type="text" aria-label="Nombre de Usuario" ></ion-input>
       <ion-icon name="person-outline" slot="end"></ion-icon>
     </ion-item>
-    <div class="validators" *ngIf="loginForm && loginForm.get('user')?.errors && loginForm.get('user')?.touched">
-      <div *ngIf="loginForm.get('user')?.hasError('required')">El nombre de usuario es obligatorio</div>
+    <div class="validators" *ngIf="loginForm && loginForm.get('name')?.errors && loginForm.get('name')?.touched">
+      <div *ngIf="loginForm.get('name')?.hasError('required')">El nombre de usuario es obligatorio</div>
+      <div *ngIf="loginForm.get('name')?.hasError('minlength')">El nombre de usuario debe tener al menos 4 caracteres</div>
     </div>
     <br>
     <ion-item>
