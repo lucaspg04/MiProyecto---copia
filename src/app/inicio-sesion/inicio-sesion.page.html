@@ -12,11 +12,12 @@
 <h3>Iniciar Sesión</h3>
 <form  [formGroup]="loginForm"  >
   <ion-item>
-    <ion-input  formControlName="user" labelPlacement="floating" label="User"  type="user" aria-label="Email" ></ion-input>
-    <ion-icon name="person-outline" slot="end"></ion-icon>
+    <ion-input  formControlName="email" labelPlacement="floating" label="Email"  type="email" aria-label="email" ></ion-input>
+    <ion-icon name="mail-outline" slot="end"></ion-icon>
   </ion-item>
-  <div class="validators" *ngIf="loginForm && loginForm.get('user')?.errors && loginForm.get('user')?.touched">
-    <div *ngIf="loginForm.get('user')?.hasError('required')">El nombre de usuario es obligatorio</div>
+  <div class="validators" *ngIf="loginForm && loginForm.get('email')?.errors && loginForm.get('email')?.touched">
+    <div *ngIf="loginForm.get('email')?.hasError('required')">El email es obligatorio</div>
+    <div *ngIf="loginForm.get('email')?.hasError('email')">El email no es válido</div>
   </div>
   <br>
   <ion-item >
