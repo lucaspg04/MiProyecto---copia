@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 //import { UserCredential } from 'firebase/auth';
 import { User } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore'; 
-import {getFirestore, setDoc, doc} from '@angular/fire/firestore';
+import {getFirestore, setDoc, doc, getDoc} from '@angular/fire/firestore';
 
 
 
@@ -84,5 +84,12 @@ setDocument(path: string, data: any){
   return setDoc(doc(getFirestore(),path),data);
 
 }
+
+ //===== obtener un documento=========
+async getDocument(path: string){
+  return (await getDoc(doc(getFirestore(),path))).data();
+
+}
+
 
 }

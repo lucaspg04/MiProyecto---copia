@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UtilsService } from './services/utils.service'; 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,5 +15,5 @@ export class AppComponent {
     { title: 'Cerrar Sesión', url: '', icon: 'exit' },
   ];
   public labels = [/* 'Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders' */];
-  constructor() {}
+  constructor(public utilsSvc: UtilsService) {}
 }

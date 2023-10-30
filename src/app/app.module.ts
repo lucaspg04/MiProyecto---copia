@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+import { UtilsService } from './services/utils.service';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
@@ -20,7 +21,7 @@ import { environment } from 'src/environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
 
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },UtilsService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
