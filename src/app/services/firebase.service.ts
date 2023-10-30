@@ -18,33 +18,15 @@ export class FirebaseService {
     
   }
 
-
-
-
-  //===== Autenticación======
-
+//================ Autenticación=========================
 
    //===== Acceder======
-
   signIn(user: User) {
     return this.afAuth.signInWithEmailAndPassword(user.email, user.password);
   }
 
 
    //===== Agregar usuario======
-
-  //signUp(user: User) {
-    //return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-      //.then((userCredential) => {
-        // Actualizar el perfil del usuario con el nombre
-        //return this.updateUser(user.name);
-      //})
-      //.catch((error) => {
-        // Manejar errores aquí
-        //console.error(error);
-      //});
-  //}
-
   signup(user: User) {
     return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
       .then((userCredential) => {
@@ -75,7 +57,6 @@ export class FirebaseService {
         console.error(error);
       });
   }
-
 
   //===== Actualizar usuario======
   updateUser(displayName: string) {

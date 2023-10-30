@@ -18,12 +18,6 @@ export class UtilsService {
   }
 
 
-  //======en ruta=========
-  //routerlink(url: string) {
-    //return this.router.navigateByUrl(url);
-
-  //}
-
   //======guarda en localStorage=========
   saveInLocalStorage(key: string, value: any) {
     return localStorage.setItem(key, JSON.stringify(value));

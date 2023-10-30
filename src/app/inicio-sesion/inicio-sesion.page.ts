@@ -51,16 +51,16 @@ export class InicioSesionPage implements OnInit {
       // Todos los campos están llenos, redirige a la página deseada
       const loading = await this.utilsSvc.loading();
       await loading.present();
-      this.firebaseSvc.signIn(this.loginForm.value as User).then(res =>{
+      this.firebaseSvc.signIn(this.loginForm.value as User).then(res => {
         console.log(res);
-      }).catch(error =>{
+      }).catch(error => {
         console.log(error);
 
-      }).finally(()=>{
+      }).finally(() => {
         loading.dismiss();
       }
       )
-      //this.router.navigate(['folder/inbox']);
+      this.router.navigate(['folder/inbox']);
     } else {
       // Muestra un mensaje de error o realiza otra acción según tus necesidades
       console.log('Por favor, complete todos los campos.');

@@ -26,7 +26,7 @@
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('password')?.errors && loginForm.get('password')?.touched">
       <div *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</div>
-      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 4 caracteres</div>
+      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</div>
     </div>
     <br>
     <ion-item>

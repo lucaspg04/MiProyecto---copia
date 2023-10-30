@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar-contrasenia',
@@ -8,16 +8,16 @@ import { Router} from '@angular/router';
   styleUrls: ['./recuperar-contrasenia.page.scss'],
 })
 export class RecuperarContraseniaPage {
-  loginForm: FormGroup; 
-  
+  loginForm: FormGroup;
 
 
-  constructor(private formBuilder: FormBuilder,private router: Router) { 
+
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]],
-      password2: ['', [Validators.required, Validators.minLength(4)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      password2: ['', [Validators.required, Validators.minLength(6)]],
     }, {
       validators: this.passwordsMatchValidator // Agregar la validación personalizada
     });
@@ -31,13 +31,11 @@ export class RecuperarContraseniaPage {
     const password2 = formGroup.get('password2')?.value;
 
     if (password === password2) {
-      formGroup.get('password2')?.setErrors(null); 
+      formGroup.get('password2')?.setErrors(null);
     } else {
       formGroup.get('password2')?.setErrors({ passwordMismatch: true }); // Contraseñas no coinciden
     }
   }
-
-  
 
   onsubmit() {
     if (this.loginForm.valid) {
