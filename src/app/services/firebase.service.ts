@@ -27,35 +27,20 @@ export class FirebaseService {
 
 
    //===== Agregar usuario======
-  signup(user: User) {
-    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-      .then((userCredential) => {
-        // userCredential.user contiene el usuario recién registrado
-        const newUser = userCredential.user;
-        
-        // newUser.uid contiene el UID del usuario
-        const uid = newUser.uid;
-  
-        // Actualizar el perfil del usuario con el nombre
-        return this.updateUser(user.name);
-      })
-      .catch((error) => {
-        // Manejar errores aquí
-        console.error(error);
-        return Promise.reject(error);
-      });
-  }
 
-  signUp(user: User) {
-    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-      .then((userCredential) => {
-        // Actualizar el perfil del usuario con el nombre
-        return this.updateUser(user.name);
-      })
-      .catch((error) => {
-        // Manejar errores aquí
-        console.error(error);
-      });
+  async signUp(user: User) {
+    try {
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
+  
+      // Actualizar el perfil del usuario con el nombre
+      await this.updateUser(user.name);
+  
+      return userCredential; // Devuelve el userCredential en caso de éxito
+    } catch (error) {
+      // Manejar errores aquí
+      console.error(error);
+      throw error; // Lanza el error para que sea manejado por el código que llama a signUp
+    }
   }
 
   //===== Actualizar usuario======
