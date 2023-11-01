@@ -6,6 +6,8 @@ import { FirebaseService } from '../services/firebase.service';
 import { User } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
 import { ToastController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Component({
@@ -14,12 +16,13 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 export class InicioSesionPage implements OnInit {
+  userModel: User;
   loginForm: FormGroup;
   showPassword: boolean = false; // Variable para controlar la visibilidad de la contraseña
 
 
   constructor(
-    private formBuilder: FormBuilder, private router: Router, private toastController: ToastController,) {
+    private formBuilder: FormBuilder, private router: Router, private toastController: ToastController,private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -53,12 +56,25 @@ export class InicioSesionPage implements OnInit {
 
       try {
         const userCredential = await this.firebaseSvc.signIn(this.loginForm.value as User);
-        const user = userCredential.user;
 
-        // Almacena el resultado en el almacenamiento local para futuras sesiones
-        this.utilsSvc.saveInLocalStorage('userName', user.displayName); // Almacena el nombre
+        const user = await this.afAuth.currentUser;
 
-        console.log('Inicio de sesión exitoso:', user.displayName); // Muestra el nombre en la consola
+        if (user) {
+          this.firestore
+            .collection('users')
+            .doc(user.uid)
+            .valueChanges()
+            .subscribe((userFirestore: User) => {
+              this.userModel = userFirestore;
+              console.log('Datos del usuario model:', this.userModel);
+              this.utilsSvc.saveInLocalStorage('name',this.userModel.name); // Almacena el nombre
+              this.utilsSvc.saveInLocalStorage('apellido',this.userModel.apellido); // Almacena el nombre
+              this.utilsSvc.saveInLocalStorage('email', this.userModel.email); // Almacena el nombre
+              this.utilsSvc.saveInLocalStorage('telefono', this.userModel.telefono); // Recupera el teléfono
+            });
+        } else {
+          console.log('No hay usuario autenticado.');
+        }
 
         loading.dismiss();
         this.router.navigate(['folder/inbox']);

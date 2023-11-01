@@ -21,6 +21,8 @@ export class RegistroPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       uid: [''],
       name: ['', [Validators.required, Validators.minLength(4)]],
+      apellido: ['', [Validators.required, Validators.minLength(4)]],
+      telefono: ['+569', [Validators.pattern(/^\+569\d{8}$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -44,7 +46,7 @@ export class RegistroPage implements OnInit {
         const userCredential = await this.firebaseSvc.signUp(user);
   
         // Actualizar el perfil del usuario con el nombre
-        await this.firebaseSvc.updateUser(user.name);
+        await this.firebaseSvc.updateUser(user.name, user.telefono);
   
         // Obtener el UID del usuario después del registro
         const uid = userCredential.user?.uid;
@@ -121,11 +123,5 @@ export class RegistroPage implements OnInit {
     }
   }
   
-  
-  
-  
-  
-  
-
 
 }

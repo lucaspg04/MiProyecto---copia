@@ -27,8 +27,8 @@
     <!-- Nombre -->
     <ion-item class="ion-item-space">
       <ion-label>
-        <h2>NOMBRE</h2>
-        <p>Alexis</p>
+        <h2>Nombre</h2>
+        <p>{{ utilsSvc.getFromLocalStorage('name') }}</p>
       </ion-label>
     </ion-item>
   
@@ -37,7 +37,7 @@
     <ion-item class="ion-item-space">
       <ion-label>
         <h2>Apellido</h2>
-        <p>Sanchez</p>
+        <p>{{ utilsSvc.getFromLocalStorage('apellido') }}</p>
       </ion-label>
     </ion-item>
   
@@ -45,7 +45,7 @@
     <ion-item class="ion-item-space">
       <ion-label>
         <h2>Numero de Teléfono</h2>
-        <p>912**4545</p>
+        <p>{{ utilsSvc.getFromLocalStorage('telefono') }}</p>
       </ion-label>
     </ion-item>
   
@@ -53,7 +53,7 @@
     <ion-item class="ion-item-space">
       <ion-label>
         <h2>Correo Electronico</h2>
-        <p>duocuc@duocuc.cl</p>
+        <p>{{ utilsSvc.getFromLocalStorage('email') }}</p>
       </ion-label>
     </ion-item>
   

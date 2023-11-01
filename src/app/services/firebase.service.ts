@@ -7,6 +7,7 @@ import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +33,7 @@ export class FirebaseService {
       const userCredential = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
 
       // Actualizar el perfil del usuario con el nombre
-      await this.updateUser(user.name);
+      await this.updateUser(user.name, user.telefono);
 
       return userCredential; // Devuelve el userCredential en caso de éxito
     } catch (error) {
@@ -43,7 +44,7 @@ export class FirebaseService {
   }
 
   //===== Actualizar usuario======
-  updateUser(displayName: string) {
+  UpdateUser(displayName: string, ) {
     return this.afAuth.currentUser.then((user) => {
       if (user) {
         return user.updateProfile({ displayName });
@@ -58,6 +59,28 @@ export class FirebaseService {
       return Promise.reject(error);
     });
   }
+
+  updateUser(displayName: string,  phoneNumber: string) {
+    return this.afAuth.currentUser.then((user) => {
+      console.log('fono'+user.phoneNumber)
+      if (user) {
+        const profile = {
+          displayName,
+          phoneNumber,
+        };
+
+        return user.updateProfile(profile);
+      } else {
+        return Promise.reject("No hay un usuario autenticado.");
+      }
+    }).catch((error) => {
+      console.error(error);
+      return Promise.reject(error);
+    });
+  }
+
+
+
 
   //===== enviar email para restablecer contraseña==========
   sendRecoveryEmail(email: string) {
