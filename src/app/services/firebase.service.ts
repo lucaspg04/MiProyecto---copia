@@ -1,10 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
-//import { UserCredential } from 'firebase/auth';
 import { User } from '../models/user.model';
-import { AngularFirestore } from '@angular/fire/compat/firestore'; 
-import {getFirestore, setDoc, doc, getDoc} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getFirestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
+import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
 
 
 
@@ -14,27 +13,27 @@ import {getFirestore, setDoc, doc, getDoc} from '@angular/fire/firestore';
 export class FirebaseService {
 
 
-  constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) { 
-    
+  constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
+
   }
 
-//================ Autenticación=========================
+  //================ Autenticación=========================
 
-   //===== Acceder======
+  //===== Acceder======
   signIn(user: User) {
     return this.afAuth.signInWithEmailAndPassword(user.email, user.password);
   }
 
 
-   //===== Agregar usuario======
+  //===== Agregar usuario======
 
   async signUp(user: User) {
     try {
       const userCredential = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
-  
+
       // Actualizar el perfil del usuario con el nombre
       await this.updateUser(user.name);
-  
+
       return userCredential; // Devuelve el userCredential en caso de éxito
     } catch (error) {
       // Manejar errores aquí
@@ -60,21 +59,26 @@ export class FirebaseService {
     });
   }
 
+  //===== enviar email para restablecer contraseña==========
+  sendRecoveryEmail(email: string) {
+    return sendPasswordResetEmail(getAuth(), email)
 
-//============================ Base de Datos=======================
+  }
 
- //===== setear un documento======
+  //============================ Base de Datos=======================
 
-setDocument(path: string, data: any){
-  return setDoc(doc(getFirestore(),path),data);
+  //===== setear un documento======
 
-}
+  setDocument(path: string, data: any) {
+    return setDoc(doc(getFirestore(), path), data);
 
- //===== obtener un documento=========
-async getDocument(path: string){
-  return (await getDoc(doc(getFirestore(),path))).data();
+  }
 
-}
+  //===== obtener un documento=========
+  async getDocument(path: string) {
+    return (await getDoc(doc(getFirestore(), path))).data();
+
+  }
 
 
 }

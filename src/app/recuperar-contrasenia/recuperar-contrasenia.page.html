@@ -4,15 +4,7 @@
   <h3>Recuperar Contraseña</h3>
   <form [formGroup]="loginForm"  >
     <ion-item>
-      <ion-input  formControlName="user" labelPlacement="floating" label="User"  type="user" aria-label="Nombre de Usuario" ></ion-input>
-      <ion-icon name="person-outline" slot="end"></ion-icon>
-    </ion-item>
-    <div class="validators" *ngIf="loginForm && loginForm.get('user')?.errors && loginForm.get('user')?.touched">
-      <div *ngIf="loginForm.get('user')?.hasError('required')">El nombre de usuario es obligatorio</div>
-    </div>
-    <br>
-    <ion-item>
-      <ion-input  formControlName="email" labelPlacement="floating" label="email"  type="Email" aria-label="Email" ></ion-input>
+      <ion-input  formControlName="email" labelPlacement="floating" label="Email"  type="Email" aria-label="Email" ></ion-input>
       <ion-icon name="mail-outline"></ion-icon>
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('email')?.errors && loginForm.get('email')?.touched">
@@ -20,23 +12,6 @@
       <div *ngIf="loginForm.get('email')?.hasError('email')">El email no es válido</div>
     </div>
     <br>
-    <ion-item>
-      <ion-input formControlName="password" labelPlacement="floating" label="Password"  type="password" aria-label="password"></ion-input>
-      <ion-icon name="lock-closed-outline"></ion-icon>
-    </ion-item>
-    <div class="validators" *ngIf="loginForm && loginForm.get('password')?.errors && loginForm.get('password')?.touched">
-      <div *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</div>
-      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</div>
-    </div>
-    <br>
-    <ion-item>
-      <ion-input formControlName="password2" labelPlacement="floating" label="Repetir Password"  type="password" aria-label="password2"></ion-input>
-      <ion-icon name="lock-closed-outline"></ion-icon>
-      </ion-item>
-      <div class="validators" *ngIf="loginForm && loginForm.get('password2')?.errors && loginForm.get('password2')?.touched">
-        <div *ngIf="loginForm.get('password2')?.hasError('required')">La contraseña es obligatoria</div>
-        <div *ngIf="loginForm.get('password2')?.hasError('passwordMismatch')">La contraseñas no coinciden</div>
-      </div>
     <ion-button  (click)="onsubmit()" expand="full" color="primary" type="submit" class="ion-padding" [disabled]="loginForm.invalid" >
       Recuperar
     </ion-button>

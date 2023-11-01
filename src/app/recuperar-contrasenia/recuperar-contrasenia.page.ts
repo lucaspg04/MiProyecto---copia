@@ -1,27 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
+import { FirebaseService } from '../services/firebase.service';
+import { UtilsService } from '../services/utils.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-recuperar-contrasenia',
   templateUrl: './recuperar-contrasenia.page.html',
   styleUrls: ['./recuperar-contrasenia.page.scss'],
 })
-export class RecuperarContraseniaPage {
+export class RecuperarContraseniaPage implements OnInit {
   loginForm: FormGroup;
 
 
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private toastController: ToastController,) {
     this.loginForm = this.formBuilder.group({
-      user: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      password2: ['', [Validators.required, Validators.minLength(6)]],
     }, {
       validators: this.passwordsMatchValidator // Agregar la validación personalizada
     });
   }
+
+  firebaseSvc = inject(FirebaseService);
+  utilsSvc = inject(UtilsService);
 
   ngOnInit() {
   }
@@ -37,13 +41,50 @@ export class RecuperarContraseniaPage {
     }
   }
 
-  onsubmit() {
+  async onsubmit() { // Marca la función como async
     if (this.loginForm.valid) {
-      // Todos los campos están llenos, redirige a la página deseada
-      this.router.navigate(['']);
-    } else {
-      // Muestra un mensaje de error o realiza otra acción según tus necesidades
-      console.log('Por favor, complete todos los campos.');
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+  
+      try {
+        await this.firebaseSvc.sendRecoveryEmail(this.loginForm.value.email);
+  
+        // Restablecer el formulario para borrar los valores
+        this.loginForm.reset();
+  
+        // Muestra un toast de éxito
+        const successToast = await this.toastController.create({
+          message: 'Correo de recuperación de contraseña enviado!.',
+          duration: 3000,
+          position: 'top',
+          color: 'success',
+        });
+  
+        await successToast.present();
+      } catch (error) {
+        console.log('Error durante la recuperación de contraseña:', error);
+  
+        let errorMessage = 'Ocurrió un error al enviar el correo de recuperación de contraseña.';
+  
+        if (error.code === 'auth/invalid-email') {
+          errorMessage = 'El correo electrónico proporcionado no es válido.';
+        }
+  
+        // Muestra un toast de error
+        const errorToast = await this.toastController.create({
+          message: errorMessage,
+          duration: 3000,
+          position: 'top',
+          color: 'danger',
+        });
+  
+        await errorToast.present();
+  
+        // Restablecer el formulario para borrar los valores
+        this.loginForm.reset();
+      } finally {
+        loading.dismiss();
+      }
     }
   }
 
