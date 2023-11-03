@@ -1,13 +1,21 @@
-<app-encabezado titulo="Seleccione su rol"></app-encabezado>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Selecciona tu rol</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content class="ion-padding">
-  <br><br>
-
-  <ion-label style="display: flex; justify-content: center;">Seleccione su rol: </ion-label>
-  <br>
-  <div style="display: flex; justify-content: space-around;">
-    <ion-button (click)="onClick('perfil')">Conductor</ion-button>
-    <ion-button (click)="onClick('folder/inbox')">Pasajero</ion-button>
-  </div>
-  <br>
+<ion-content>
+  <ion-list>
+    <ion-radio-group>
+      <ion-item>
+        <ion-label>Conductor</ion-label>
+        <ion-radio value="conductor"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pasajero</ion-label>
+        <ion-radio value="pasajero"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+  <ion-button expand="full" (click)="guardarRol()">Guardar</ion-button>
 </ion-content>

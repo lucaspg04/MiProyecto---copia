@@ -20,4 +20,8 @@ export class RolPage implements OnInit {
   {
     this.router.navigate(['/'+ruta])
   }
+
+  guardarRol(){
+    
+  }
 }

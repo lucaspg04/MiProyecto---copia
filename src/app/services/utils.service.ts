@@ -30,4 +30,9 @@ export class UtilsService {
 
   }
 
+  getrol(){
+    const rol =  this.getFromLocalStorage('rol')
+    return rol
+  }
+
 }

@@ -71,6 +71,7 @@ export class InicioSesionPage implements OnInit {
               this.utilsSvc.saveInLocalStorage('apellido',this.userModel.apellido); // Almacena el nombre
               this.utilsSvc.saveInLocalStorage('email', this.userModel.email); // Almacena el nombre
               this.utilsSvc.saveInLocalStorage('telefono', this.userModel.telefono); // Recupera el teléfono
+              this.utilsSvc.saveInLocalStorage('rol', this.userModel.rol); 
             });
         } else {
           console.log('No hay usuario autenticado.');

@@ -27,6 +27,7 @@
 
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RolpermisoGuard } from './guards/rolpermiso.guard';
 
 const routes: Routes = [
   {
@@ -76,7 +77,8 @@ const routes: Routes = [
   },
   {
     path: 'viajeconductor',
-    loadChildren: () => import('./viajeconductor/viajeconductor.module').then( m => m.ViajeconductorPageModule)
+    loadChildren: () => import('./viajeconductor/viajeconductor.module').then( m => m.ViajeconductorPageModule),
+    canActivate: [RolpermisoGuard]
   },
   {
     path: 'conductortrackeo',

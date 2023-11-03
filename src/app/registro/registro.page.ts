@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FirebaseService } from '../services/firebase.service';
 import { User } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
@@ -25,7 +25,17 @@ export class RegistroPage implements OnInit {
       telefono: ['+569', [Validators.pattern(/^\+569\d{8}$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      rol:['',[this.radioGroupValidator]]
     });
+  }
+
+  radioGroupValidator(control: AbstractControl): ValidationErrors | null {
+    const selectedValue = control.value;
+    if (selectedValue === 'conductor' || selectedValue === 'pasajero') {
+      return null; 
+    } else {
+      return { radioInvalido: true };
+    }
   }
 
   firebaseSvc = inject(FirebaseService);
@@ -41,6 +51,7 @@ export class RegistroPage implements OnInit {
   
       try {
         const user = this.loginForm.value as User;
+        user.rol = this.loginForm.get('rol').value;
   
         // Use your FirebaseService to sign up the user
         const userCredential = await this.firebaseSvc.signUp(user);
@@ -54,6 +65,8 @@ export class RegistroPage implements OnInit {
         if (uid) {
           // Establecer el UID en el formulario
           this.loginForm.get('uid').setValue(uid);
+
+          
   
           // Llamar a la función setUserInfo (if needed)
           await this.setUserInfo(uid);
@@ -104,7 +117,12 @@ export class RegistroPage implements OnInit {
   
       // Elimina la contraseña antes de guardarla en Local Storage
       const userData = { ...this.loginForm.value };
+
+      userData.rol = this.loginForm.get('rol').value;
+      
       delete userData.password;
+
+      
   
       this.firebaseSvc.setDocument(path, userData).then(res => {
         // Guarda los datos en el Local Storage

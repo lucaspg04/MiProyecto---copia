@@ -47,6 +47,18 @@
       <div *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</div>
       <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 4 caracteres</div>
     </div>
+    <br>
+      <ion-radio-group formControlName="rol">
+        <ion-item>
+          <ion-label>Conductor</ion-label>
+          <ion-radio value="conductor"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Pasajero</ion-label>
+          <ion-radio value="pasajero"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
     <ion-button  (click)="onsubmit();" expand="full" color="primary" type="submit" class="ion-padding" [disabled]="loginForm.invalid" >
       Registrarse
     </ion-button>
