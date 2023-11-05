@@ -57,15 +57,17 @@ export class ViajeconductorPage implements OnInit {
           const conductorData = {
             uid: user.uid,
             email: user.email,
-            // Otros campos del usuario que necesitas
           };
-  
           const viajeData = { ...this.viajeform.value, conductor: conductorData, viaje_disponible: true };
-  
+
           try {
             const docRef = await this.afs.collection('viajes').add(viajeData);
-            console.log('Documento guardado con ID: ', docRef.id);
-            // Realiza cualquier otra acción después de guardar
+            const viajeId = docRef.id;
+            console.log('Documento guardado con ID: ', viajeId);
+
+            viajeData.id = viajeId
+
+            this.utilsSvc.saveInLocalStorage('viaje', viajeData);
           } catch (error) {
             console.error('Error al guardar el documento: ', error);
           }
@@ -73,8 +75,9 @@ export class ViajeconductorPage implements OnInit {
           console.error('No hay usuario autenticado.');
         }
       });
+      this.router.navigate(['detalleconductor']);
     }
   }
-  
+
   
 }

@@ -22,17 +22,20 @@
   </ion-list>
 
   <div id="page-background" class="ion-align-items-center">
-    <ion-grid class="page-image">
-      <ion-row>
-        <ion-col size="12">
-          <img src="../../../assets/img/google_maps.jpg" alt="te_llevo_logo" class="page-image">
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="ion-padding">
-    <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
-      Solicitar
-    </ion-button>
+    <div class="ion-padding" *ngFor="let viaje of (viajes | async)">
+      <ion-list [inset]="true">
+        <ion-item [button]="true" detail="false" (click)="Viajeseleccionado(viaje)">
+          <div class="unread-indicator-wrapper" slot="start"></div>
+          <ion-label>
+            <ion-text>Destino: {{viaje.destino}}</ion-text><br/><br>
+            <ion-text>Precio por Pasajero:  {{viaje.valorPorPasajero}}</ion-text><br/><br>
+            <ion-text>Asientos Disponibles: {{viaje.asientos}}</ion-text><br/>
+          </ion-label>
+        </ion-item>
+      </ion-list>
   </div>
+  <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
+    Solicitar
+  </ion-button>
   </div>
 </ion-content>

@@ -83,7 +83,11 @@ const routes: Routes = [
   {
     path: 'conductortrackeo',
     loadChildren: () => import('./conductortrackeo/conductortrackeo.module').then( m => m.ConductortrackeoPageModule)
+  },  {
+    path: 'detalleconductor',
+    loadChildren: () => import('./detalleconductor/detalleconductor.module').then( m => m.DetalleconductorPageModule)
   },
+
 
   // Agrega aquí las rutas para las páginas de sidemenu si las tienes
 ];

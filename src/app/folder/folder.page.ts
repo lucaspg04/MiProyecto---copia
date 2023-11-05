@@ -1,6 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,6 +13,7 @@ import { Router } from '@angular/router';
 })
 
 export class FolderPage implements OnInit {
+  viajes: Observable<any[]>;
 
   public folder!: string;
   private activatedRoute = inject(ActivatedRoute);
@@ -21,11 +25,15 @@ export class FolderPage implements OnInit {
 
 
   constructor(
-    private router:Router
+    private router:Router,
+    private firestore:AngularFirestore,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
-    
+    this.viajes = this.firestore.collection('viajes', (ref) =>
+      ref.where('viaje_disponible', '==', true)
+    ).valueChanges();
   }
   searchItems() {
     // Aquí puedes realizar la lógica de búsqueda y filtrar los elementos según 'searchTerm'
@@ -51,6 +59,18 @@ export class FolderPage implements OnInit {
     this.searchTerm = suggestion;
     this.showSuggestions = false;
     this.showNoResults = false;
+  }
+
+  Viajeseleccionado(viaje){
+    if (viaje) {
+      console.log("viaje: ", viaje);
+      
+      this.navCtrl.navigateForward('/detalle-viaje', {
+        state: { viaje: viaje }
+      });
+    } else {
+      console.log("El objeto 'viaje' es nulo o indefinido.");
+    }
   }
 
   onClick(ruta:string)

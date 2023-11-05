@@ -1,25 +1,31 @@
-<app-encabezado titulo="Detalle del viaje"></app-encabezado>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-avatar slot="end">
+      <img src="../../assets/img/te_llevo.png" />
+    </ion-avatar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/folder/inbox"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalle del Viaje</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-<ion-content>
-  <br>
-  <div class="ion-padding">
+<ion-content class="ion-padding">
   <ion-list lines="none">
     <ion-item>
       <ion-label>
-        <h2>Destino</h2>
-        <p>Comienzo: </p>
-        <p>Destino: </p>
-        <p>Conductor: </p>
-        <p>Vehiculo: </p>
-        <p>Cantidad max. de pasajeros: </p>
-        <p>Asientos ocupados: </p>
-        <p>Precio: </p>
+        <h2>Viaje</h2>
+        <p>Destino: {{ viaje.destino }}</p>
+        <p>Fecha y Hora: {{ viaje.fechaHora  | date: 'dd/MM/yyyy , HH:mm'}}</p>
+        <p>Conductor: {{ viaje.conductor.email }}</p>
+        <p>Vehiculo: {{ viaje.vehiculo }}</p>
+        <p>Asientos disponibles: {{ viaje.asientos }}</p>
+        <p>Precio: {{ viaje.valorPorPasajero }}</p>
       </ion-label>
     </ion-item>
   </ion-list>
-</div>
+
   <div class="ion-padding">
-    <ion-button expand="full" (click)="onClick('pago')">Confirmar</ion-button>
+    <ion-button expand="full" (click)="onClick()">Confirmar Viaje</ion-button>
   </div>
 </ion-content>
-
