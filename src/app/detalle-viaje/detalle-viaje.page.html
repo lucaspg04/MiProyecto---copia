@@ -26,6 +26,6 @@
   </ion-list>
 
   <div class="ion-padding">
-    <ion-button expand="full" (click)="onClick()">Confirmar Viaje</ion-button>
+    <ion-button expand="full" (click)="onClick()" [disabled]="confirmado">Confirmar Viaje</ion-button>
   </div>
 </ion-content>

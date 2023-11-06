@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { viaje } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
 import { FirebaseService } from '../services/firebase.service';
@@ -22,17 +22,26 @@ export class ViajeconductorPage implements OnInit {
     this.viajeform = this.formBuilder.group({
       destino: ['', Validators.required],
       fechaHora: ['', this.fechaNoAnteriorValidator],
-      numPasajeros : [''],
-      valorPorPasajero: ['', Validators.required],
-      asientos: ['', Validators.required]
+      valorPorPasajero: ['', Validators.required,],
+      asientos: ['', [Validators.required, this.validarAsientos]]
     });
   }
 
   ngOnInit() {
-  }
+  } 
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
+
+  validarAsientos(control: FormControl) {
+    const valorAsientos = control.value;
+  
+    if (valorAsientos >= 1 && valorAsientos <= 4) {
+      return null;
+    } else {
+      return { asientosInvalidos: true };
+    }
+  }
 
   fechaNoAnteriorValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const fechaIngresada = new Date(control.value);

@@ -32,32 +32,32 @@ export class DetalleViajePage implements OnInit {
   }
   
 
+  confirmado: boolean = false;
+
   async onClick() {
-    // Reducir el número de asientos disponibles en 1
-    this.viaje.asientos -= 1;
-  
-    // Actualizar Firestore con el nuevo número de asientos disponibles
-    const viajeDocRef = this.afs.collection('viajes').doc(this.viaje.uid);
-
+    if (!this.confirmado) {
+      this.viaje.asientos -= 1;
     
-
-    const pasajeroData = {
-      nombre: this.utilsSvc.getFromLocalStorage('name'),
-      apellido: this.utilsSvc.getFromLocalStorage('apellido'),
-      email: this.utilsSvc.getFromLocalStorage('email'),
-      telefono: this.utilsSvc.getFromLocalStorage('telefono')
-  }
+      const viajeDocRef = this.afs.collection('viajes').doc(this.viaje.uid);
   
-    try {
-      await viajeDocRef.update({ asientos: this.viaje.asientos });
-
-      const pasajerosCollectionRef = viajeDocRef.collection('pasajeros');
-      
-      
-      await pasajerosCollectionRef.add(pasajeroData);
-      //this.router.navigate(['tu-siguiente-pagina']);
-    } catch (error) {
-      console.error('Error al actualizar el número de asientos disponibles en Firestore:', error);
+      const pasajeroData = {
+        nombre: this.utilsSvc.getFromLocalStorage('name'),
+        apellido: this.utilsSvc.getFromLocalStorage('apellido'),
+        email: this.utilsSvc.getFromLocalStorage('email'),
+        telefono: this.utilsSvc.getFromLocalStorage('telefono')
+      }
+  
+      try {
+        await viajeDocRef.update({ asientos: this.viaje.asientos });
+  
+        const pasajerosCollectionRef = viajeDocRef.collection('pasajeros');
+        
+        await pasajerosCollectionRef.add(pasajeroData);
+        this.confirmado = true;
+      } catch (error) {
+        console.error('Error al actualizar el número de asientos disponibles en Firestore:', error);
+      }
     }
   }
+  
 }

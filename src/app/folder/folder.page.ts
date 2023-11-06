@@ -32,7 +32,11 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.viajes = this.firestore.collection('viajes', (ref) =>
-      ref.where('viaje_disponible', '==', true)
+    ref.where('viaje_disponible', '==', true)
+    ).valueChanges();
+
+    this.viajes = this.firestore.collection('viajes', (ref) =>
+    ref.where('asientos', ">", 0)
     ).valueChanges();
   }
   searchItems() {

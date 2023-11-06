@@ -14,7 +14,7 @@ export class DetalleconductorPage implements OnInit {
 
   pasajeros: any[] = [];
 
-  constructor(private afs: AngularFirestore, private router:Router) {}
+  constructor(private afs: AngularFirestore, private router: Router) { }
 
   ngOnInit() {
     this.viaje = this.utilsSvc.getFromLocalStorage('viaje');
@@ -34,26 +34,22 @@ export class DetalleconductorPage implements OnInit {
 
   utilsSvc = inject(UtilsService);
 
-  
-  
-  onClick(){
+
+
+  onClick() {
 
     const viajelocale = this.utilsSvc.getId()
 
     const viajeRef = this.afs.collection('viajes').doc(viajelocale);
 
-// Realiza la actualización para cambiar 'viaje_disponible' a false.
-  this.router.navigate(['folder/folder']);
-  viajeRef.update({ viaje_disponible: true })
-  
-  .then(() => {
-    console.log('Viaje finalizado con éxito.');
-    // Realiza cualquier otra acción después de finalizar el viaje.
-  })
-  .catch((error) => {
-    console.error('Error al finalizar el viaje: ', error);
-  });
+    this.router.navigate(['folder/folder']);
+    viajeRef.update({ viaje_disponible: false })
 
+      .then(() => {
+        console.log('Viaje finalizado con éxito.');
+      })
+      .catch((error) => {
+        console.error('Error al finalizar el viaje: ', error);
+      });
   }
-
 }
