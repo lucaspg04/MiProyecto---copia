@@ -28,14 +28,14 @@
           <div class="unread-indicator-wrapper" slot="start"></div>
           <ion-label>
             <ion-text>Destino: {{viaje.destino}}</ion-text><br/><br>
-            <ion-text>Precio por Pasajero:  {{viaje.valorPorPasajero}}</ion-text><br/><br>
+            <ion-text>Precio por Pasajero:  ${{viaje.valorPorPasajero}}</ion-text><br/><br>
             <ion-text>Asientos Disponibles: {{viaje.asientos}}</ion-text><br/>
           </ion-label>
         </ion-item>
       </ion-list>
   </div>
-  <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
+  <!-- <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
     Solicitar
-  </ion-button>
+  </ion-button> -->
   </div>
 </ion-content>

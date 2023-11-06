@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-avatar slot="end">
-    <img src="../../assets/img/te_llevo.png" />
+      <img src="../../assets/img/te_llevo.png" />
     </ion-avatar>
     <ion-buttons slot="start">
       <!-- <ion-back-button defaultHref="/folder/inbox"></ion-back-button> -->
@@ -10,7 +10,41 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding">
+  <div *ngIf="viaje">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label>
+          <h2>Viaje</h2>
+          <p>Destino: {{ viaje.destino }}</p>
+          <p>Fecha y Hora: {{ viaje.fechaHora | date: 'dd/MM/yyyy HH:mm'}}</p>
+          <p>Conductor: {{ viaje.conductor.email }}</p>
+          <p>Vehiculo: {{ viaje.vehiculo }}</p>
+          <p>Asientos disponibles: {{ viaje.asientos }}</p>
+          <p>Precio: ${{ viaje.valorPorPasajero }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="!viaje">
+    <p>No hay viaje en curso.</p>
+  </div>
+  <br>
+  <ion-list *ngIf="pasajeros.length > 0">
+    <ion-item>
+      <ion-label>
+        <h3>Pasajeros:</h3>
+        <ul>
+          <li *ngFor="let pasajero of pasajeros">
+            {{ pasajero.nombre }} {{ pasajero.apellido }} <br> {{ pasajero.email }} <br> {{ pasajero.telefono }}
+          </li>
+        </ul>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="pasajeros.length === 0">
+    <p>No hay pasajeros registrados en este viaje.</p>
+  </ion-list>
   <ion-button (click)="onClick()" expand="full" color="primary" type="submit" class="ion-padding">
     Finalizar viaje
   </ion-button>

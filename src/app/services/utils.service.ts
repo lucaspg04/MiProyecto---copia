@@ -40,9 +40,9 @@ export class UtilsService {
     const viajeData = this.getFromLocalStorage('viaje');
   
     // Comprueba si los datos del viaje y el campo 'id' existen
-    if (viajeData && viajeData.id) {
+    if (viajeData && viajeData.uid) {
       // Obtiene el ID del viaje
-      const viajeId = viajeData.id;
+      const viajeId = viajeData.uid;
       return viajeId;
     } else {
       // Maneja el caso en el que no se encontró un ID válido en el Local Storage

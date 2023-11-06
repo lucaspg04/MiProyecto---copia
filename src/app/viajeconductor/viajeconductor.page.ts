@@ -55,18 +55,17 @@ export class ViajeconductorPage implements OnInit {
       this.afAuth.authState.subscribe(async (user) => {
         if (user) {
           const conductorData = {
-            uid: user.uid,
-            email: user.email,
+            email: this.utilsSvc.getFromLocalStorage('email')
           };
-          const viajeData = { ...this.viajeform.value, conductor: conductorData, viaje_disponible: true };
+          const viajeData = { ...this.viajeform.value, conductor: conductorData, viaje_disponible: true, };
 
           try {
+            
             const docRef = await this.afs.collection('viajes').add(viajeData);
             const viajeId = docRef.id;
+            viajeData.uid = viajeId
+            await docRef.set(viajeData, { merge: true });
             console.log('Documento guardado con ID: ', viajeId);
-
-            viajeData.id = viajeId
-
             this.utilsSvc.saveInLocalStorage('viaje', viajeData);
           } catch (error) {
             console.error('Error al guardar el documento: ', error);

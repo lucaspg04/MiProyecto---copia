@@ -10,22 +10,41 @@ import { UtilsService } from '../services/utils.service';
 })
 export class DetalleconductorPage implements OnInit {
 
-  constructor(private afs: AngularFirestore, private router:Router) { }
+  viaje: any
+
+  pasajeros: any[] = [];
+
+  constructor(private afs: AngularFirestore, private router:Router) {}
 
   ngOnInit() {
+    this.viaje = this.utilsSvc.getFromLocalStorage('viaje');
+
+    const viajeId = this.utilsSvc.getId()
+
+    if (this.viaje) {
+      // Obtén la subcolección "pasajeros" del documento de viaje actual
+      this.afs
+        .collection(`viajes/${viajeId}/pasajeros`)
+        .valueChanges()
+        .subscribe((pasajeros: any[]) => {
+          this.pasajeros = pasajeros;
+        });
+    }
   }
 
   utilsSvc = inject(UtilsService);
+
+  
   
   onClick(){
 
     const viajelocale = this.utilsSvc.getId()
-    // Supongamos que tienes el ID del viaje que deseas finalizar en una variable llamada 'viajeId'.
+
     const viajeRef = this.afs.collection('viajes').doc(viajelocale);
 
 // Realiza la actualización para cambiar 'viaje_disponible' a false.
   this.router.navigate(['folder/folder']);
-  viajeRef.update({ viaje_disponible: false })
+  viajeRef.update({ viaje_disponible: true })
   
   .then(() => {
     console.log('Viaje finalizado con éxito.');

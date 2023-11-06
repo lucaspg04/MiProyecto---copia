@@ -63,8 +63,6 @@ export class FolderPage implements OnInit {
 
   Viajeseleccionado(viaje){
     if (viaje) {
-      console.log("viaje: ", viaje);
-      
       this.navCtrl.navigateForward('/detalle-viaje', {
         state: { viaje: viaje }
       });

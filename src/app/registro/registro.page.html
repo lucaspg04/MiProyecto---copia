@@ -13,7 +13,7 @@
     </div>
     <br>
     <ion-item>
-      <ion-input  formControlName="apellido" labelPlacement="floating" label="apellido"  type="text" aria-label="Apeliido de Usuario" ></ion-input>
+      <ion-input  formControlName="apellido" labelPlacement="floating" label="Apellido"  type="text" aria-label="Apeliido de Usuario" ></ion-input>
       <ion-icon name="person-outline" slot="end"></ion-icon>
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('name')?.errors && loginForm.get('name')?.touched">
@@ -31,7 +31,7 @@
   </div>
   <br>
     <ion-item>
-      <ion-input  formControlName="email" labelPlacement="floating" label="email"  type="email" aria-label="email" ></ion-input>
+      <ion-input  formControlName="email" labelPlacement="floating" label="Email"  type="email" aria-label="email" ></ion-input>
       <ion-icon name="mail-outline"></ion-icon>
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('email')?.errors && loginForm.get('email')?.touched">
@@ -50,12 +50,10 @@
     <br>
       <ion-radio-group formControlName="rol">
         <ion-item>
-          <ion-label>Conductor</ion-label>
-          <ion-radio value="conductor"></ion-radio>
+          <ion-radio value="conductor">Conductor</ion-radio>
         </ion-item>
         <ion-item>
-          <ion-label>Pasajero</ion-label>
-          <ion-radio value="pasajero"></ion-radio>
+          <ion-radio value="pasajero">Pasajero</ion-radio>
         </ion-item>
       </ion-radio-group>
 

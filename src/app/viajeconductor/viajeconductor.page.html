@@ -14,32 +14,27 @@
   <form [formGroup]="viajeform" (ngSubmit)="onSubmit()">
     <ion-list>
       <ion-item>
-        <ion-label position="floating">Destino</ion-label>
-        <ion-input formControlName="destino" type="text"></ion-input>
+        <ion-input formControlName="destino" type="text">Destino</ion-input>
       </ion-item>
       <br>
 
       <ion-item>
-        <ion-label position="floating">Fecha y Hora</ion-label>
-        <br><br>
-        <ion-datetime formControlName="fechaHora" displayFormat="MM/DD/YYYY HH:mm"></ion-datetime>
+        <br><br>  
+        <ion-datetime formControlName="fechaHora" displayFormat="MM/DD/YYYY HH:mm">Fecha y Hora</ion-datetime>
       </ion-item>
 
       <br>
 
       <ion-item>
-        <ion-label position="floating">Número de Pasajeros</ion-label>
-        <ion-input formControlName="numPasajeros" type="number"></ion-input>
+        <ion-input formControlName="numPasajeros" type="number">Numero de Pasajeros</ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Valor por Pasajero</ion-label>
-        <ion-input formControlName="valorPorPasajero" type="number"></ion-input>
+        <ion-input formControlName="valorPorPasajero" type="number">Valor por Pasajero</ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Capacidad de pasajeros (Asientos)</ion-label>
-        <ion-input formControlName="asientos" type="number"></ion-input>
+        <ion-input formControlName="asientos" type="number">Asientos Disponibles</ion-input>
       </ion-item>
       
     </ion-list>
