@@ -35,7 +35,7 @@
       <ion-icon name="mail-outline"></ion-icon>
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('email')?.errors && loginForm.get('email')?.touched">
-      <div *ngIf="loginForm.get('email')?.hasError('required')">El email es obligatoria</div>
+      <div *ngIf="loginForm.get('email')?.hasError('required')">El email es obligatorio</div>
       <div *ngIf="loginForm.get('email')?.hasError('email')">El email es inválido</div>
     </div>
     <br>
@@ -45,13 +45,14 @@
     </ion-item>
     <div class="validators" *ngIf="loginForm && loginForm.get('password')?.errors && loginForm.get('password')?.touched">
       <div *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es obligatoria</div>
-      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 4 caracteres</div>
+      <div *ngIf="loginForm.get('password')?.hasError('minlength')">La contraseña debe tener al menos 6 caracteres</div>
     </div>
     <br>
       <ion-radio-group formControlName="rol">
         <ion-item>
           <ion-radio value="conductor">Conductor</ion-radio>
         </ion-item>
+        <br>
         <ion-item>
           <ion-radio value="pasajero">Pasajero</ion-radio>
         </ion-item>

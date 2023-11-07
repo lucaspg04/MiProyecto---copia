@@ -12,7 +12,7 @@
 
 <ion-content [fullscreen]="true">
 
-<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="updateSuggestions()" Placeholder="Donde Te Llevo?"></ion-searchbar>
+<!--<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="updateSuggestions()" Placeholder="¡Ingresa Comuna de Destino!"></ion-searchbar>-->
 
   <ion-list *ngIf="showSuggestions">
     <ion-item *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion)">
@@ -24,18 +24,21 @@
   <div id="page-background" class="ion-align-items-center">
     <div class="ion-padding" *ngFor="let viaje of (viajes | async)">
       <ion-list [inset]="true">
-        <ion-item [button]="true" detail="false" (click)="Viajeseleccionado(viaje)">
+        <ion-item [button]="true" detail="false" (click)="Viajeseleccionado(viaje)" [hidden]="viaje.asientos <= 0">
           <div class="unread-indicator-wrapper" slot="start"></div>
           <ion-label>
+            <ion-text color="white"><h2>Origen: Duoc Sede San Andrés</h2></ion-text><br>
             <ion-text>Destino: {{viaje.destino}}</ion-text><br/><br>
             <ion-text>Precio por Pasajero:  ${{viaje.valorPorPasajero}}</ion-text><br/><br>
             <ion-text>Asientos Disponibles: {{viaje.asientos}}</ion-text><br/>
+            <br>
+            <p class="custom-button-style" >Seleccionar</p>
           </ion-label>
         </ion-item>
       </ion-list>
   </div>
-  <!-- <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
+  </div>
+  <!--<ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
     Solicitar
   </ion-button> -->
-  </div>
 </ion-content>

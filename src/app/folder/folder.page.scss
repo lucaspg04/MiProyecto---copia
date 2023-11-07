@@ -26,3 +26,17 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+
+.custom-button-style {
+  cursor: pointer; /* Cambia el cursor al estilo de puntero al pasar el mouse. */
+  background-color: #007bff; /* Color de fondo del "botón". */
+  color: white; /* Color del texto en el "botón". */
+  padding: 8px 16px; /* Espaciado interno para simular un botón. */
+  border: none; /* Quita el borde del "botón". */
+  border-radius: 4px; /* Añade esquinas redondeadas al "botón". */
+  text-align: center;
+}
+
+.custom-button-style:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el mouse por encima. */
+}

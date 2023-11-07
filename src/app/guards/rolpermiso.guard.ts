@@ -30,7 +30,7 @@ export class RolpermisoGuard implements CanActivate {
     } else {
       // En caso contrario, redirige a una página de acceso no autorizado o retorna false
 
-      return true;
+      return false;
     }
   }
   

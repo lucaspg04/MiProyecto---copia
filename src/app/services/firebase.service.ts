@@ -102,4 +102,31 @@ export class FirebaseService {
     return (await getDoc(doc(getFirestore(), path))).data();
 
   }
+
+  //=====obtiene el rol de la colección usera del usuario autenticado en firebase no funciona
+  async getUserRole() {
+    try {
+      const user = await this.afAuth.currentUser;
+      if (user) {
+        const userDoc = await this.firestore.collection('users').doc(user.uid).get().toPromise();
+        if (userDoc.exists) {
+          const userData: any = userDoc.data(); // Anotación de tipo como "any"
+          const userRole = userData?.rol; // Asumiendo que el campo se llama "rol"
+          return userRole || null; // Devuelve el rol o null si no se encuentra
+        } else {
+          return null; // Documento de usuario no encontrado
+        }
+      }
+      return null; // Usuario no autenticado
+    } catch (error) {
+      console.error('Error al obtener el rol del usuario:', error);
+      return null;
+    }
+  }
+
+
+
+
+
+
 }
