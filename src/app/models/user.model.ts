@@ -8,11 +8,11 @@ export interface User{
     rol: string
 }
 
-export interface viaje {
+export interface Viaje {
     uid:string,
     destino:string,
     conductor:User,
-    precio:number,
+    valorPorPasajero:number,
     fecha:Date,
     pasajeros: User[]
 }

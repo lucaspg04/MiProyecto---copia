@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
-import { viaje } from '../models/user.model';
+import { Viaje } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
 import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';

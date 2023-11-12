@@ -1,9 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { User } from '../models/user.model';
+import { User, Viaje } from '../models/user.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { getFirestore, setDoc, doc, getDoc } from '@angular/fire/firestore';
 import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
+import { addDoc, collection } from 'firebase/firestore';
+import { Observable } from 'rxjs';
 
 
 
@@ -13,7 +15,7 @@ import { sendPasswordResetEmail, getAuth } from 'firebase/auth';
 })
 export class FirebaseService {
 
-
+  viajesModel : Viaje[];
   constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
 
   }
@@ -103,30 +105,27 @@ export class FirebaseService {
 
   }
 
-  //=====obtiene el rol de la colección usera del usuario autenticado en firebase no funciona
-  async getUserRole() {
-    try {
-      const user = await this.afAuth.currentUser;
-      if (user) {
-        const userDoc = await this.firestore.collection('users').doc(user.uid).get().toPromise();
-        if (userDoc.exists) {
-          const userData: any = userDoc.data(); // Anotación de tipo como "any"
-          const userRole = userData?.rol; // Asumiendo que el campo se llama "rol"
-          return userRole || null; // Devuelve el rol o null si no se encuentra
-        } else {
-          return null; // Documento de usuario no encontrado
-        }
-      }
-      return null; // Usuario no autenticado
-    } catch (error) {
-      console.error('Error al obtener el rol del usuario:', error);
-      return null;
-    }
+  //==== agregar un documento====
+  addDocument(path: string, data: any) {
+    return addDoc(collection(getFirestore(), path), data);
+
   }
 
+  obtenerViajesPorPasajero(viaje_uid: string) {
+    return this.firestore.collection('viajes', ref =>
+      ref.where(`pasajeros.${viaje_uid}`, '==', true)
+    ).valueChanges();
+  }
 
-
-
-
+  getViajesDePasajero(idPasajero: string): Observable<Viaje[]> {
+    this.firestore
+            .collection('viajes')
+            .valueChanges()
+            .subscribe((viajesFirestore: any) => {
+              console.log('viajes: ')
+              console.log()
+            });
+    return null;
+  }
 
 }
