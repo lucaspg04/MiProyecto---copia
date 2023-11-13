@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'registro',
@@ -60,27 +60,27 @@ const routes: Routes = [
   {
     path: 'detalle-viaje',
     loadChildren: () => import('./detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'pago',
     loadChildren: () => import('./pago/pago.module').then( m => m.PagoPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'rol',
     loadChildren: () => import('./rol/rol.module').then( m => m.RolPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'viajeconductor',
@@ -90,12 +90,12 @@ const routes: Routes = [
   {
     path: 'conductortrackeo',
     loadChildren: () => import('./conductortrackeo/conductortrackeo.module').then( m => m.ConductortrackeoPageModule),
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'detalleconductor',
     loadChildren: () => import('./detalleconductor/detalleconductor.module').then( m => m.DetalleconductorPageModule),
-    canActivate: [AuthGuard]
+    /* canActivate: [AuthGuard] */
   },
 
 

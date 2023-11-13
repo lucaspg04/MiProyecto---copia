@@ -35,9 +35,9 @@ export class FolderPage implements OnInit {
     ref.where('viaje_disponible', '==', true)
     ).valueChanges();
 
-    this.viajes = this.firestore.collection('viajes', (ref) =>
-    ref.where('asientos', ">", 0)
-    ).valueChanges();
+    /* this.viajes = this.firestore.collection('viajes', (ref) =>
+    ref.where('asientos', ">", 4)
+    ).valueChanges(); */
   }
   searchItems() {
     // Aquí puedes realizar la lógica de búsqueda y filtrar los elementos según 'searchTerm'
