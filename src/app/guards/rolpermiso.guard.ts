@@ -25,7 +25,7 @@ export class RolpermisoGuard implements CanActivate {
 
     let rol = this.utilsSvc.getrol()
 
-    if (rol === 'conductor') {
+    if (rol === 'Conductor') {
       return true;
     } else {
       // En caso contrario, redirige a una página de acceso no autorizado o retorna false

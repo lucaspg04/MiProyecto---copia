@@ -85,7 +85,7 @@ const routes: Routes = [
   {
     path: 'viajeconductor',
     loadChildren: () => import('./viajeconductor/viajeconductor.module').then( m => m.ViajeconductorPageModule),
-    canActivate: [RolpermisoGuard,AuthGuard]
+    canActivate: [RolpermisoGuard]
   },
   {
     path: 'conductortrackeo',

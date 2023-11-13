@@ -31,7 +31,7 @@ export class RegistroPage implements OnInit {
 
   radioGroupValidator(control: AbstractControl): ValidationErrors | null {
     const selectedValue = control.value;
-    if (selectedValue === 'conductor' || selectedValue === 'pasajero') {
+    if (selectedValue === 'Conductor' || selectedValue === 'Pasajero') {
       return null; 
     } else {
       return { radioInvalido: true };
