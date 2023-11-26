@@ -72,13 +72,20 @@ export class InicioSesionPage implements OnInit {
               this.utilsSvc.saveInLocalStorage('email', this.userModel.email); // Almacena el nombre
               this.utilsSvc.saveInLocalStorage('telefono', this.userModel.telefono); // Recupera el teléfono
               this.utilsSvc.saveInLocalStorage('rol', this.userModel.rol); 
+              if(this.userModel.rol == "pasajero") {
+                this.router.navigate(['folder/inbox']);
+              } else {
+                this.router.navigate(['viajeconductor']);
+              }
+              
             });
         } else {
           console.log('No hay usuario autenticado.');
         }
 
         loading.dismiss();
-        this.router.navigate(['folder/inbox']);
+        
+        //this.router.navigate(['folder/inbox']);
       } catch (error) {
         console.log('Error durante el inicio de sesión:', error);
 

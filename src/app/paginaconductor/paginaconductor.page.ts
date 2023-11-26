@@ -1,23 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
-import { Viaje } from '../models/user.model';
 import { UtilsService } from '../services/utils.service';
 import { FirebaseService } from '../services/firebase.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
-  selector: 'app-viajeconductor',
-  templateUrl: './viajeconductor.page.html',
-  styleUrls: ['./viajeconductor.page.scss'],
+  selector: 'app-paginaconductor',
+  templateUrl: './paginaconductor.page.html',
+  styleUrls: ['./paginaconductor.page.scss'],
 })
-export class ViajeconductorPage implements OnInit {
+export class PaginaconductorPage implements OnInit {
   viajeform: FormGroup; // Define el formulario
 
-  
-
-  constructor(private router: Router, private formBuilder: FormBuilder, private afs: AngularFirestore, private afAuth: AngularFireAuth) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private afs: AngularFirestore, private afAuth: AngularFireAuth, private navCtrl: NavController) {
     this.viajeform = this.formBuilder.group({
       destino: ['', Validators.required],
       fechaHora: ['', this.fechaNoAnteriorValidator],
@@ -27,7 +26,7 @@ export class ViajeconductorPage implements OnInit {
   }
 
   ngOnInit() {
-  } 
+  }
 
   firebaseSvc = inject(FirebaseService);
   utilsSvc = inject(UtilsService);
@@ -86,5 +85,12 @@ export class ViajeconductorPage implements OnInit {
     }
   }
 
-  
+  irAPerfil() {
+    console.log('hola')
+    this.navCtrl.navigateForward('/perfilconductor');
+    
+  }
+
+
+
 }

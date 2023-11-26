@@ -38,16 +38,11 @@ export class HistorialPage implements OnInit {
               this.viajes = viajesFirestore;
               console.log("viajes: ",this.viajes);
               this.viajes.forEach(viaje => {
-                //this.viajeConsulta = viaje;
                 this.firestore.collection(`viajes/${viaje.uid}/pasajeros`).valueChanges().subscribe((pasajeros: any) => {
                   this.usuariosPorViaje = pasajeros;
-                  //console.log("usuarios por viaje: ",viaje.uid)
-                  //console.log(this.usuariosPorViaje)
                   if(this.usuariosPorViaje.length > 0){
                     this.usuariosPorViaje.forEach(usuario => {
-                      //console.log("correo logeado: "+user.email)
                       if(usuario.email == correoUsuarioLogeado && this.validarUidViaje(viaje.uid)){
-                        //console.log("super if")
                         this.viajesDelUsuario.push(viaje)
                       }
                     });

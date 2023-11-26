@@ -1,30 +1,3 @@
-// import { NgModule } from '@angular/core';
-// import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
-// const routes: Routes = [
-//   {
-//     path: '',
-//     redirectTo: 'folder/Inbox',
-//     pathMatch: 'full'
-//   },
-//   {
-//     path: 'folder/:id',
-//     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-//   },
-//   {
-//     path: 'inicio-sesion',
-//     loadChildren: () => import('./inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
-//   }
-// ];
-
-// @NgModule({
-//   imports: [
-//     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-//   ],
-//   exports: [RouterModule]
-// })
-// export class AppRoutingModule {}
-
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RolpermisoGuard } from './guards/rolpermiso.guard';
@@ -97,6 +70,15 @@ const routes: Routes = [
     loadChildren: () => import('./detalleconductor/detalleconductor.module').then( m => m.DetalleconductorPageModule),
     /* canActivate: [AuthGuard] */
   },
+  {
+    path: 'paginaconductor',
+    loadChildren: () => import('./paginaconductor/paginaconductor.module').then( m => m.PaginaconductorPageModule)
+  },
+  {
+    path: 'perfilconductor',
+    loadChildren: () => import('./perfilconductor/perfilconductor.module').then( m => m.PerfilconductorPageModule)
+  },
+
 
 
   // Agrega aquí las rutas para las páginas de sidemenu si las tienes
