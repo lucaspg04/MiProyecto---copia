@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RolpermisoGuard } from './guards/rolpermiso.guard';
-import { AuthGuard } from './guards/auth.guard';
+import { Rolpermiso2Guard} from './guards/rolpermiso2.guard';
 
 const routes: Routes = [
   {
@@ -20,7 +20,6 @@ const routes: Routes = [
   {
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'registro',
@@ -33,27 +32,23 @@ const routes: Routes = [
   {
     path: 'detalle-viaje',
     loadChildren: () => import('./detalle-viaje/detalle-viaje.module').then( m => m.DetalleViajePageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'pago',
     loadChildren: () => import('./pago/pago.module').then( m => m.PagoPageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule),
-    //canActivate: [AuthGuard]
+    canActivate: [Rolpermiso2Guard]
   },
   {
     path: 'rol',
     loadChildren: () => import('./rol/rol.module').then( m => m.RolPageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'viajeconductor',
@@ -63,21 +58,13 @@ const routes: Routes = [
   {
     path: 'conductortrackeo',
     loadChildren: () => import('./conductortrackeo/conductortrackeo.module').then( m => m.ConductortrackeoPageModule),
-    //canActivate: [AuthGuard]
   },
   {
     path: 'detalleconductor',
     loadChildren: () => import('./detalleconductor/detalleconductor.module').then( m => m.DetalleconductorPageModule),
-    /* canActivate: [AuthGuard] */
   },
-  {
-    path: 'paginaconductor',
-    loadChildren: () => import('./paginaconductor/paginaconductor.module').then( m => m.PaginaconductorPageModule)
-  },
-  {
-    path: 'perfilconductor',
-    loadChildren: () => import('./perfilconductor/perfilconductor.module').then( m => m.PerfilconductorPageModule)
-  },
+
+
 
 
 

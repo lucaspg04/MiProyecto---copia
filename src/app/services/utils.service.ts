@@ -32,7 +32,8 @@ export class UtilsService {
 
   getrol(){
     const rol =  this.getFromLocalStorage('rol')
-    return rol
+    console.log('Rol desde localStorage:', rol);
+    return rol;
   }
 
   getId() {

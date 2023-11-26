@@ -55,6 +55,7 @@ export class InicioSesionPage implements OnInit {
       await loading.present();
 
       try {
+        
         const userCredential = await this.firebaseSvc.signIn(this.loginForm.value as User);
 
         const user = await this.afAuth.currentUser;
