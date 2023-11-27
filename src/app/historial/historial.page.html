@@ -11,85 +11,28 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-content>
+  <div *ngIf="!viajes || viajes.length === 0">
+    No hay viajes disponibles.
+  </div>
+  <ion-card *ngFor="let viaje of viajesDelUsuario">
+    <ion-card-content >
       <ion-item>
         <ion-label>Partida: </ion-label>
+        <p>Duoc Uc sede San Andrés</p>
       </ion-item>
       <ion-item>
-        <ion-label>Destino: </ion-label>
+        <ion-label>ID Viaje: {{ viaje.uid }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Conductor: </ion-label>
+        <ion-label>Destino: {{ viaje.destino }}</ion-label>
       </ion-item>
       <ion-item>
-        <ion-label>Monto total: </ion-label>
+        <ion-label>Conductor: {{viaje.conductor.email}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Monto total: ${{ viaje.valorPorPasajero }} </ion-label>
       </ion-item>
     </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Partida: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Destino: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Monto total: </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Partida: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Destino: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Monto total: </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Partida: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Destino: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Monto total: </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>
-      <ion-item>
-        <ion-label>Partida: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Destino: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Conductor: </ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-label>Monto total: </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
+  </ion-card> <hr>
   
 </ion-content>

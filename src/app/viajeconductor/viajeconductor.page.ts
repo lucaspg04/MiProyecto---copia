@@ -74,7 +74,6 @@ export class ViajeconductorPage implements OnInit {
             const viajeId = docRef.id;
             viajeData.uid = viajeId
             await docRef.set(viajeData, { merge: true });
-            console.log('Documento guardado con ID: ', viajeId);
             this.utilsSvc.saveInLocalStorage('viaje', viajeData);
           } catch (error) {
             console.error('Error al guardar el documento: ', error);

@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
 
@@ -17,12 +17,16 @@ export class DetalleconductorPage implements OnInit {
 
   constructor(private afs: AngularFirestore, private router: Router) { }
 
-  ngOnInit() {
-    this.viaje = this.utilsSvc.getFromLocalStorage('viaje');
+  async ngOnInit() {
+
+    const viaje = this.utilsSvc.getFromLocalStorage('viaje')
+
+    this.viaje = viaje
 
     const viajeId = this.utilsSvc.getId()
 
     const db = getFirestore();
+
 
     const viajesCollection = collection(db, 'viajes');
 
@@ -47,6 +51,7 @@ export class DetalleconductorPage implements OnInit {
     }
   }
 
+
   utilsSvc = inject(UtilsService);
 
 
@@ -61,10 +66,23 @@ export class DetalleconductorPage implements OnInit {
     viajeRef.update({ viaje_disponible: false })
 
       .then(() => {
-        console.log('Viaje finalizado con éxito.');
+        console.log();
       })
       .catch((error) => {
         console.error('Error al finalizar el viaje: ', error);
       });
+  }
+
+  recargarDatos(event: any) {
+    // Verificar si el gesto fue un deslizamiento hacia abajo
+    if (event.direction === 2) {  // 2 representa hacia abajo
+      // Realizar la recarga de datos aquí
+      location.reload(); // O la lógica de recarga específica que necesitas
+    }
+  }
+
+  recargardatos() {
+    // Puedes realizar la recarga de datos aquí
+    location.reload(); // Esto recargará toda la página
   }
 }

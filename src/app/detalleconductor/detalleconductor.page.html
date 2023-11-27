@@ -10,7 +10,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" (swipe)="recargarDatos($event)">
   <div *ngIf="viaje">
     <ion-list lines="none">
       <ion-item>
@@ -46,5 +46,8 @@
   </ion-list>
   <ion-button (click)="onClick()" expand="full" color="primary" type="submit" class="ion-padding">
     Finalizar viaje
+  </ion-button>
+  <ion-button (click)="recargardatos()" expand="full" color="primary" type="submit" class="ion-padding">
+    Recargar Pagina
   </ion-button>
 </ion-content>

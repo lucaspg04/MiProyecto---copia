@@ -12,7 +12,8 @@
 
 <ion-content [fullscreen]="true">
 
-<ion-searchbar [(ngModel)]="searchTerm" (ionInput)="updateSuggestions()" Placeholder="Donde Te Llevo?"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="updateSuggestions()"
+    Placeholder="Donde Te Llevo?"></ion-searchbar>
 
   <ion-list *ngIf="showSuggestions">
     <ion-item *ngFor="let suggestion of filteredSuggestions" (click)="selectSuggestion(suggestion)">
@@ -22,20 +23,24 @@
   </ion-list>
 
   <div id="page-background" class="ion-align-items-center">
-    <div class="ion-padding" *ngFor="let viaje of (viajes | async)">
-      <ion-list [inset]="true">
-        <ion-item [button]="true" detail="false" (click)="Viajeseleccionado(viaje)">
-          <div class="unread-indicator-wrapper" slot="start"></div>
-          <ion-label>
-            <ion-text>Destino: {{viaje.destino}}</ion-text><br/><br>
-            <ion-text>Precio por Pasajero:  ${{viaje.valorPorPasajero}}</ion-text><br/><br>
-            <ion-text>Asientos Disponibles: {{viaje.asientos}}</ion-text><br/>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-  </div>
-  <!-- <ion-button  (click)="onClick('detalle-viaje')" expand="block" color="primary">
-    Solicitar
-  </ion-button> -->
-  </div>
+    <ng-container *ngIf="viajes | async as viajesData; else noViajes">
+      <div class="ion-padding" *ngFor="let viaje of viajesData">
+        <ion-list [inset]="true">
+          <ion-item [button]="true" detail="false" (click)="Viajeseleccionado(viaje)">
+            <div class="unread-indicator-wrapper" slot="start"></div>
+            <ion-label>
+              <ion-text>Destino: {{viaje.destino}}</ion-text><br /><br>
+              <ion-text>Precio por Pasajero: ${{viaje.valorPorPasajero}}</ion-text><br /><br>
+              <ion-text>Asientos Disponibles: {{viaje.asientos}}</ion-text><br />
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ng-container>
+    <ng-template #noViajes>
+      <div class="ion-padding">
+        <p>No hay viajes disponibles en este momento.</p>
+      </div>
+    </ng-template>
+  </div>  
 </ion-content>

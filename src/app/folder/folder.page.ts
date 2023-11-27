@@ -32,6 +32,8 @@ export class FolderPage implements OnInit {
   ) {}
 
   ngOnInit() {
+
+    
     const db = getFirestore();
 
     const viajesCollection = collection(db, 'viajes');
@@ -41,11 +43,13 @@ export class FolderPage implements OnInit {
       querySnapshot.forEach((doc) => {
         // Maneja los datos actualizados aquí (doc.data())
         if (doc.data()["viaje_disponible"]) {
-          console.log('Datos actualizados:', doc.data());
           viajesData.push(doc.data());
+          this.viajes = of(viajesData);
+        }else{
+          this.viajes
         }
       });
-      this.viajes = of(viajesData);
+      
     });
   }
   searchItems() {
@@ -67,6 +71,7 @@ export class FolderPage implements OnInit {
     this.showSuggestions = this.searchTerm !== '';
   }
 
+  
 
   selectSuggestion(suggestion: string) {
     this.searchTerm = suggestion;
