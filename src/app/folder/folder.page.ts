@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 
 @Component({
@@ -31,13 +32,21 @@ export class FolderPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.viajes = this.firestore.collection('viajes', (ref) =>
-    ref.where('viaje_disponible', '==', true)
-    ).valueChanges();
+    const db = getFirestore();
 
-    this.viajes = this.firestore.collection('viajes', (ref) =>
-    ref.where('asientos', ">", 0)
-    ).valueChanges();
+    const viajesCollection = collection(db, 'viajes');
+
+    const unsubscribe = onSnapshot(viajesCollection, (querySnapshot) => {
+      const viajesData = [];
+      querySnapshot.forEach((doc) => {
+        // Maneja los datos actualizados aquí (doc.data())
+        if (doc.data()["viaje_disponible"]) {
+          console.log('Datos actualizados:', doc.data());
+          viajesData.push(doc.data());
+        }
+      });
+      this.viajes = of(viajesData);
+    });
   }
   searchItems() {
     // Aquí puedes realizar la lógica de búsqueda y filtrar los elementos según 'searchTerm'

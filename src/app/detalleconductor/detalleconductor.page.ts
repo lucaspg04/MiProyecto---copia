@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
 
@@ -21,8 +22,22 @@ export class DetalleconductorPage implements OnInit {
 
     const viajeId = this.utilsSvc.getId()
 
+    const db = getFirestore();
+
+    const viajesCollection = collection(db, 'viajes');
+
+    const unsubscribe = onSnapshot(viajesCollection, (querySnapshot) => {
+      let viajesData = undefined;
+      querySnapshot.forEach((doc) => {
+        const data = doc.data()
+        if (data['uid'] === viajeId) {
+          viajesData = data;
+        }
+      });
+      this.viaje = viajesData;
+    });
+
     if (this.viaje) {
-      // Obtén la subcolección "pasajeros" del documento de viaje actual
       this.afs
         .collection(`viajes/${viajeId}/pasajeros`)
         .valueChanges()
