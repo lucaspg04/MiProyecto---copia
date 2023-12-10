@@ -42,7 +42,7 @@ export class DetalleconductorPage implements OnInit {
 
     const viajeRef = this.afs.collection('viajes').doc(viajelocale);
 
-    this.router.navigate(['folder/folder']);
+    this.router.navigate(['viajeconductor']);
     viajeRef.update({ viaje_disponible: false })
 
       .then(() => {
