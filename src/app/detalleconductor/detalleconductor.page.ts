@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UtilsService } from '../services/utils.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-detalleconductor',
@@ -14,7 +15,7 @@ export class DetalleconductorPage implements OnInit {
 
   pasajeros: any[] = [];
 
-  constructor(private afs: AngularFirestore, private router: Router) { }
+  constructor(private afs: AngularFirestore, private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
     this.viaje = this.utilsSvc.getFromLocalStorage('viaje');
@@ -42,14 +43,30 @@ export class DetalleconductorPage implements OnInit {
 
     const viajeRef = this.afs.collection('viajes').doc(viajelocale);
 
-    this.router.navigate(['viajeconductor']);
+    
     viajeRef.update({ viaje_disponible: false })
 
       .then(() => {
         console.log('Viaje finalizado con éxito.');
+        this.presentToast('Viaje finalizado con éxito');
+        this.router.navigate(['viajeconductor']);
       })
       .catch((error) => {
         console.error('Error al finalizar el viaje: ', error);
       });
   }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000, // Duración en milisegundos
+      position: 'bottom' // Posición del toast
+    });
+    toast.present();
+  }
+
+  recargar() {
+    location.reload();
+  }
+
 }

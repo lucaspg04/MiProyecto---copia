@@ -1,15 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-avatar slot="end">
+    <ion-avatar slot="end" class="animate__animated animate__backInLeft">
     <img src="../../assets/img/te_llevo.png" />
     </ion-avatar>
-    <ion-title> Te llevo App </ion-title>
+    <ion-title class="animate__animated animate__bounce" > Te llevo App </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-<h3>Iniciar Sesión</h3>
+<h3 >Iniciar Sesión</h3>
 <form  [formGroup]="loginForm"  >
   <ion-item>
     <ion-input  formControlName="email" labelPlacement="floating" label="Email"  type="email" aria-label="email" ></ion-input>

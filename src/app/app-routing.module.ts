@@ -4,17 +4,17 @@ import { RolpermisoGuard } from './guards/rolpermiso.guard';
 import { Rolpermiso2Guard} from './guards/rolpermiso2.guard';
 
 const routes: Routes = [
-  {
-    path: 'portada',
-    loadChildren: () => import('./portada/portada.module').then( m => m.PortadaPageModule)
-  },
+  //{
+    //path: 'portada',
+    //loadChildren: () => import('./portada/portada.module').then( m => m.PortadaPageModule)
+  //},
   {
     path: '',
-    redirectTo: 'portada', // Redirige la ruta raíz a la página de portada
+    redirectTo: 'inicio-sesion', // Redirige la ruta raíz a la página de portada
     pathMatch: 'full'
   },
   {
-    path: 'inicio-sesion', // Establece el path para la página de inicio de sesión
+    path: 'inicio-sesion',
     loadChildren: () => import('./inicio-sesion/inicio-sesion.module').then( m => m.InicioSesionPageModule)
   },
   {
@@ -68,7 +68,7 @@ const routes: Routes = [
 
 
 
-  // Agrega aquí las rutas para las páginas de sidemenu si las tienes
+  
 ];
 
 @NgModule({
