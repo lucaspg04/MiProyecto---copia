@@ -46,10 +46,7 @@ const routes: Routes = [
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule),
     canActivate: [Rolpermiso2Guard]
   },
-  {
-    path: 'rol',
-    loadChildren: () => import('./rol/rol.module').then( m => m.RolPageModule),
-  },
+  
   {
     path: 'viajeconductor',
     loadChildren: () => import('./viajeconductor/viajeconductor.module').then( m => m.ViajeconductorPageModule),
